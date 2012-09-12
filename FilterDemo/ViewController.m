@@ -13,6 +13,11 @@
 @end
 
 @implementation ViewController
+@synthesize search_text;
+@synthesize search_chapter;
+@synthesize index_title;
+@synthesize index_chapter;
+@synthesize index_description;
 
 - (void)viewDidLoad
 {
@@ -22,6 +27,11 @@
 
 - (void)viewDidUnload
 {
+    [self setIndex_title:nil];
+    [self setIndex_chapter:nil];
+    [self setIndex_description:nil];
+    [self setSearch_text:nil];
+    [self setSearch_chapter:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -31,4 +41,16 @@
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (void)dealloc {
+    [index_title release];
+    [index_chapter release];
+    [index_description release];
+    [search_text release];
+    [search_chapter release];
+    [super dealloc];
+}
+- (IBAction)indexTapped:(id)sender {
+}
+- (IBAction)searchTapped:(id)sender {
+}
 @end
