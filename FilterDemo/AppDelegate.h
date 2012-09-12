@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <LocaytaSearch/LSLocaytaSearch.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate> {
+@interface AppDelegate : UIResponder <UIApplicationDelegate, LSLocaytaSearchIndexerDelegate, LSLocaytaSearchRequestDelegate> {
     LSLocaytaSearchIndexer *indexer;
     LSLocaytaSearchRequest *request;
 }

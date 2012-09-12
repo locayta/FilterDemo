@@ -15,6 +15,7 @@
 
 - (void)dealloc
 {
+    [indexer release];
     [_window release];
     [super dealloc];
 }
@@ -22,6 +23,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    NSArray *document_paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documents_dir = [document_paths objectAtIndex:0];
+    NSString *dbpath = [documents_dir stringByAppendingPathComponent:@"search_db"];
+    
+    indexer = [[LSLocaytaSearchIndexer alloc] initWithDatabasePath:dbpath delegate:self];
+    request = [[LSLocaytaSearchRequest alloc] initWithDatabasePath:dbpath delegate:self];
+    
     return YES;
 }
 							
@@ -50,6 +58,24 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+# pragma mark Locayta Search delegate methods
+
+- (void) locaytaSearchIndexer:(LSLocaytaSearchIndexer *)searchIndexer didUpdateWithIndexableRecords:(NSArray *)indexableRecords {
+
+}
+
+- (void) locaytaSearchIndexer:(LSLocaytaSearchIndexer *)searchIndexer didFailToUpdateWithIndexableRecords:(NSArray *)indexableRecords error:(NSError *)error {
+    
+}
+
+- (void) locaytaSearchRequest:(LSLocaytaSearchRequest *)searchRequest didCompleteWithResult:(LSLocaytaSearchResult *)searchResult {
+    
+}
+
+- (void) locaytaSearchRequest:(LSLocaytaSearchRequest *)searchRequest didFailWithError:(NSError *)error {
+    
 }
 
 @end
