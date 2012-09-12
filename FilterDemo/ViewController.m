@@ -84,4 +84,8 @@
 
 }
 
+- (IBAction)genericTextFieldDone:(id)sender {
+    [sender resignFirstResponder];
+}
+
 @end
