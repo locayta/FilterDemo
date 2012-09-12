@@ -74,13 +74,12 @@
     }
     
     // Configure the cell...
-    int pos = [indexPath indexAtPosition:0];
+    int pos = [indexPath row];
     NSDictionary * resultItem = [[[result results] objectAtIndex:pos] objectForKey:@"fields"];
     [cell textLabel].text = [NSString stringWithFormat:@"Chapter %@: %@",
                              [[resultItem objectForKey:@"chapter"] objectAtIndex:0],
                              [[resultItem objectForKey:@"title"] objectAtIndex:0]];
-    NSLog(@"cell %@", [cell description]);
-    
+       
     return cell;
 }
 
