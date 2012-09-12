@@ -90,8 +90,17 @@
 }
 
 - (IBAction)searchTapped:(id)sender {
-    NSString *queryString = search_text.text;
+    NSString *queryString = [NSString stringWithString:search_text.text];
     LSLocaytaSearchQuery *query = [LSLocaytaSearchQuery queryWithQueryString:queryString];
+    
+    NSString *chapterText = [NSString stringWithString:search_chapter.text];
+    if ([chapterText length] > 0) {
+        NSDictionary * filters = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  chapterText, @"chapter",
+                                  nil];
+        query.filters = filters;
+    }
+    
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.request searchWithQuery:query];
 }
