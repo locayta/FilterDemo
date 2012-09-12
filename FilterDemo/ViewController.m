@@ -91,9 +91,26 @@
 
 - (IBAction)searchTapped:(id)sender {
     NSString *queryString = [NSString stringWithString:search_text.text];
+    NSString *chapterText = [NSString stringWithString:search_chapter.text];
+    
+    if ([chapterText length] == 0) {
+        NSError *error = nil;
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"chapter ([1-9][0-9]*)" options:NSRegularExpressionCaseInsensitive error:&error];
+        if (error != nil) {
+            NSLog(@"Regex error %@", [error localizedDescription]);
+        }
+        NSTextCheckingResult *match = [regex firstMatchInString:queryString options:0 range:NSMakeRange(0, [queryString length])];
+        chapterText = [queryString substringWithRange:[match rangeAtIndex:1]];
+        queryString = [queryString stringByReplacingCharactersInRange:[match range] withString:@""];
+        
+        NSLog(@"queryString now: %@; chapterText now: %@", queryString, chapterText);
+        /* Replace the original text with the new versions too */
+        search_text.text = queryString;
+        search_chapter.text = chapterText;
+    }
+    
     LSLocaytaSearchQuery *query = [LSLocaytaSearchQuery queryWithQueryString:queryString];
     
-    NSString *chapterText = [NSString stringWithString:search_chapter.text];
     if ([chapterText length] > 0) {
         NSDictionary * filters = [NSDictionary dictionaryWithObjectsAndKeys:
                                   chapterText, @"chapter",
