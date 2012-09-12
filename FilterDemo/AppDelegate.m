@@ -10,6 +10,9 @@
 
 @implementation AppDelegate
 
+@synthesize indexer;
+@synthesize request;
+
 - (void)dealloc
 {
     [_window release];
