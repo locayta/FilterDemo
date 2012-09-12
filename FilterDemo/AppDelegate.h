@@ -14,6 +14,7 @@
     LSLocaytaSearchRequest *request;
 }
 
+@property (nonatomic, strong) UIViewController *viewcontroller;
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) LSLocaytaSearchIndexer *indexer;
 @property (nonatomic, retain) LSLocaytaSearchRequest *request;

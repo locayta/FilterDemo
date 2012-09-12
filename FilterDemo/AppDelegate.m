@@ -10,6 +10,7 @@
 
 @implementation AppDelegate
 
+@synthesize viewcontroller;
 @synthesize indexer;
 @synthesize request;
 

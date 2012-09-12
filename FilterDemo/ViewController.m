@@ -23,10 +23,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    /* Create a reference to this controller in the AppDelegate, which is
+       currently also the LSLocaytaSearchIndexer and Request delegate. */
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.viewcontroller = self;
 }
 
 - (void)viewDidUnload
 {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.viewcontroller = nil;
     [self setIndex_title:nil];
     [self setIndex_chapter:nil];
     [self setIndex_description:nil];
