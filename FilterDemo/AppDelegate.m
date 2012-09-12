@@ -13,10 +13,13 @@
 @synthesize viewcontroller;
 @synthesize indexer;
 @synthesize request;
+@synthesize schema;
 
 - (void)dealloc
 {
     [indexer release];
+    [request release];
+    [schema release];
     [_window release];
     [super dealloc];
 }
@@ -27,9 +30,22 @@
     NSArray *document_paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documents_dir = [document_paths objectAtIndex:0];
     NSString *dbpath = [documents_dir stringByAppendingPathComponent:@"search_db"];
+
+    NSString *schemaFilename = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"schema.plist"];
+    NSDictionary *indexSchema = [[NSDictionary alloc] initWithContentsOfFile:schemaFilename];
+    
+    if (![LSLocaytaSearchIndexer databaseExistsAtPath:dbpath]) {
+        NSError * error;
+        NSLog(@"Creating new index at %@", dbpath);
+        [LSLocaytaSearchIndexer createDatabaseAtPath:dbpath error:&error];
+        if (error) {
+            NSLog(@"Unable to create database: %@", [error localizedDescription]);
+        }
+    }
     
     indexer = [[LSLocaytaSearchIndexer alloc] initWithDatabasePath:dbpath delegate:self];
     request = [[LSLocaytaSearchRequest alloc] initWithDatabasePath:dbpath delegate:self];
+    schema = indexSchema;
     
     return YES;
 }
@@ -64,11 +80,11 @@
 # pragma mark Locayta Search delegate methods
 
 - (void) locaytaSearchIndexer:(LSLocaytaSearchIndexer *)searchIndexer didUpdateWithIndexableRecords:(NSArray *)indexableRecords {
-
+    NSLog(@"Indexing succeeded");
 }
 
 - (void) locaytaSearchIndexer:(LSLocaytaSearchIndexer *)searchIndexer didFailToUpdateWithIndexableRecords:(NSArray *)indexableRecords error:(NSError *)error {
-    
+    NSLog(@"Indexing failed: %@", [error localizedDescription]);
 }
 
 - (void) locaytaSearchRequest:(LSLocaytaSearchRequest *)searchRequest didCompleteWithResult:(LSLocaytaSearchResult *)searchResult {

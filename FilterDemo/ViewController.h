@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <LocaytaSearch/LSLocaytaSearch.h>
 
 @interface ViewController : UIViewController
 @property (retain, nonatomic) IBOutlet UITextField *index_title;

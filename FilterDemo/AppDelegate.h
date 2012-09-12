@@ -12,11 +12,13 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, LSLocaytaSearchIndexerDelegate, LSLocaytaSearchRequestDelegate> {
     LSLocaytaSearchIndexer *indexer;
     LSLocaytaSearchRequest *request;
+    NSDictionary *schema;
 }
 
 @property (nonatomic, strong) UIViewController *viewcontroller;
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) LSLocaytaSearchIndexer *indexer;
 @property (nonatomic, retain) LSLocaytaSearchRequest *request;
+@property (nonatomic, retain) NSDictionary *schema;
 
 @end

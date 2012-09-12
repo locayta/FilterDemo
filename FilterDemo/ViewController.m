@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()
 
@@ -55,8 +56,32 @@
     [search_chapter release];
     [super dealloc];
 }
+
 - (IBAction)indexTapped:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSLog(@"appDelegate: %@, schema: %@", [appDelegate description], appDelegate.schema);
+    LSLocaytaSearchIndexableRecord *record = [[LSLocaytaSearchIndexableRecord alloc] initWithSchema:appDelegate.schema];
+    
+    NSError *error = nil;
+    
+    if (![record addValue:[index_title text] forField:@"title" error:&error]) {
+        NSLog(@"Error: %@", [error localizedDescription]);    // handle error
+    }
+    if (![record addValue:[index_chapter text] forField:@"chapter" error:&error]) {
+        NSLog(@"Error: %@", [error localizedDescription]);    // handle error
+    }
+    if (![record addValue:[index_description text] forField:@"description" error:&error]) {
+        NSLog(@"Error: %@", [error localizedDescription]);    // handle error
+    }
+    
+    [appDelegate.indexer addOrReplaceRecord:record];
+    // returns immediately as operation is performed asynchronously. A delegate method will be called when completed (or failed).
+    
+    [record release];
 }
+
 - (IBAction)searchTapped:(id)sender {
+
 }
+
 @end
