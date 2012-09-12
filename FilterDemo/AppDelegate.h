@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <LocaytaSearch/LSLocaytaSearch.h>
+#import "ViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, LSLocaytaSearchIndexerDelegate, LSLocaytaSearchRequestDelegate> {
     LSLocaytaSearchIndexer *indexer;
@@ -15,7 +16,7 @@
     NSDictionary *schema;
 }
 
-@property (nonatomic, strong) UIViewController *viewcontroller;
+@property (nonatomic, strong) ViewController *viewcontroller;
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, retain) LSLocaytaSearchIndexer *indexer;
 @property (nonatomic, retain) LSLocaytaSearchRequest *request;

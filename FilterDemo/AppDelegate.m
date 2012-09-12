@@ -88,11 +88,12 @@
 }
 
 - (void) locaytaSearchRequest:(LSLocaytaSearchRequest *)searchRequest didCompleteWithResult:(LSLocaytaSearchResult *)searchResult {
-    
+    NSLog(@"Search request succeeded; %d results", [searchResult itemCount]);
+    [viewcontroller populateSearchResultListing:searchResult];
 }
 
 - (void) locaytaSearchRequest:(LSLocaytaSearchRequest *)searchRequest didFailWithError:(NSError *)error {
-    
+    NSLog(@"Search request failed: %@", [error localizedDescription]);
 }
 
 @end

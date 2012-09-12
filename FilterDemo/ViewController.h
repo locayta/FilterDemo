@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <LocaytaSearch/LSLocaytaSearch.h>
+#import "ResultsTableViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController {
+    ResultsTableViewController *rtvc;
+}
 @property (retain, nonatomic) IBOutlet UITextField *index_title;
 @property (retain, nonatomic) IBOutlet UITextField *index_chapter;
 @property (retain, nonatomic) IBOutlet UITextField *index_description;
@@ -18,5 +21,8 @@
 @property (retain, nonatomic) IBOutlet UITextField *search_text;
 @property (retain, nonatomic) IBOutlet UITextField *search_chapter;
 - (IBAction)searchTapped:(id)sender;
+- (void)populateSearchResultListing:(LSLocaytaSearchResult *)searchResult;
+
+@property (retain, nonatomic) IBOutlet UITableView *results_table;
 
 @end

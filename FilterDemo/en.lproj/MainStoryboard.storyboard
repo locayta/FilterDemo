@@ -115,6 +115,7 @@
                         <outlet property="index_chapter" destination="ugB-xa-PRa" id="ee4-yV-NgH"/>
                         <outlet property="index_description" destination="fwL-Vy-rv8" id="9OY-W8-zWa"/>
                         <outlet property="index_title" destination="v9A-el-IJq" id="PKa-UF-EW4"/>
+                        <outlet property="results_table" destination="did-gc-Q3v" id="vjp-cK-sLw"/>
                         <outlet property="search_chapter" destination="i87-4f-yNq" id="7e2-iL-8RG"/>
                         <outlet property="search_text" destination="WSQ-fe-4Wd" id="WFT-dq-ANm"/>
                     </connections>
@@ -122,21 +123,6 @@
             </objects>
         </scene>
     </scenes>
-    <classes>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="genericTextFieldDone:"/>
-                <relationship kind="action" name="indexTapped:"/>
-                <relationship kind="action" name="searchTapped:"/>
-                <relationship kind="outlet" name="index_chapter" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="index_description" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="index_title" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="search_chapter" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="search_text" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

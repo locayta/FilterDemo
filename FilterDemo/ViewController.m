@@ -14,6 +14,7 @@
 @end
 
 @implementation ViewController
+@synthesize results_table;
 @synthesize search_text;
 @synthesize search_chapter;
 @synthesize index_title;
@@ -28,17 +29,24 @@
        currently also the LSLocaytaSearchIndexer and Request delegate. */
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.viewcontroller = self;
+    
+    /* Wire up the results table view */
+    rtvc = [[ResultsTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    results_table.delegate = rtvc;
+    results_table.dataSource = rtvc;
 }
 
 - (void)viewDidUnload
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.viewcontroller = nil;
+    [rtvc dealloc];
     [self setIndex_title:nil];
     [self setIndex_chapter:nil];
     [self setIndex_description:nil];
     [self setSearch_text:nil];
     [self setSearch_chapter:nil];
+    [self setResults_table:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -54,6 +62,7 @@
     [index_description release];
     [search_text release];
     [search_chapter release];
+    [results_table release];
     [super dealloc];
 }
 
@@ -81,7 +90,17 @@
 }
 
 - (IBAction)searchTapped:(id)sender {
+    NSString *queryString = search_text.text;
+    LSLocaytaSearchQuery *query = [LSLocaytaSearchQuery queryWithQueryString:queryString];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.request searchWithQuery:query];
+}
 
+- (void) populateSearchResultListing:(LSLocaytaSearchResult *)searchResult {
+    /* Called when searches successfully complete */
+    rtvc.result = searchResult;
+    [results_table reloadData];
+    [results_table reloadInputViews];
 }
 
 - (IBAction)genericTextFieldDone:(id)sender {
