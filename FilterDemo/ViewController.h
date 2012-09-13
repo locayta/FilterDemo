@@ -17,6 +17,7 @@
 @property (retain, nonatomic) IBOutlet UITextField *index_chapter;
 @property (retain, nonatomic) IBOutlet UITextField *index_description;
 - (IBAction)indexTapped:(id)sender;
+- (IBAction)resetTapped:(id)sender;
 
 @property (retain, nonatomic) IBOutlet UITextField *search_text;
 @property (retain, nonatomic) IBOutlet UITextField *search_chapter;

@@ -89,6 +89,19 @@
     [record release];
 }
 
+- (IBAction)resetTapped:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *dbpath = [appDelegate.indexer databasePath];
+    if ([LSLocaytaSearchIndexer databaseExistsAtPath:dbpath]) {
+        /* Remove existing search database */
+        [[NSFileManager defaultManager] removeItemAtPath:dbpath error:NULL];
+    }
+    NSError * error;
+    if (![LSLocaytaSearchIndexer createDatabaseAtPath:dbpath error:&error]) {
+        NSLog(@"Error creating new index at path %@: %@", dbpath, [error localizedDescription]);
+    }
+}
+
 - (IBAction)searchTapped:(id)sender {
     NSString *queryString = [NSString stringWithString:search_text.text];
     NSString *chapterText = [NSString stringWithString:search_chapter.text];
