@@ -47,12 +47,17 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [[result facets] count];
+    NSInteger sections = [[result facets] count];
+    if (!sections)
+        sections = 1;
+    return sections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    if ([[result facets] count] == 0)
+        return 0;
     NSString *key = [[[result facets] allKeys] objectAtIndex:section];
     NSDictionary *facetData = [[result facets] objectForKey:key];
     return [facetData count];
@@ -80,6 +85,14 @@
     cell.textLabel.font  = myFont;
 
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    // Return the title for each section
+    if ([[result facets] count] == 0)
+        return @"Facets";
+    NSString *key = [[[result facets] allKeys] objectAtIndex:section];
+    return key;
 }
 
 /*

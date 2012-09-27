@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ViewController ()
 
@@ -40,6 +41,12 @@
     ftvc = [[FacetsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     facets_table.delegate = ftvc;
     facets_table.dataSource = ftvc;
+    
+    /* Put borders around the facet and results table view */
+    [facets_table.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [facets_table.layer setBorderWidth:1.0];
+    [results_table.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [results_table.layer setBorderWidth:1.0];
 }
 
 - (void)viewDidUnload
