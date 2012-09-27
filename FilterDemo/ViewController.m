@@ -53,7 +53,7 @@
     [self setSearch_text:nil];
     [self setSearch_chapter:nil];
     [self setResults_table:nil];
-    [self setfacets_table:nil];
+    [self setFacets_table:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -135,13 +135,10 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.request searchWithQuery:query topDocIndex:0 docsPerPage:10 facets:facets];
 
-    sleep(1);
-    NSLog(@"query description: %@", [query queryDescription]);
 }
 
 - (void) populateSearchResultListing:(LSLocaytaSearchResult *)searchResult {
     /* Called when searches successfully complete */
-    NSLog(@"Populating search results with results: %@, facets: %@", [searchResult results], [searchResult facets]);
     rtvc.result = searchResult;
     ftvc.result = searchResult;
     [results_table reloadData];
