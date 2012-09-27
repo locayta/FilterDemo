@@ -1,18 +1,18 @@
 //
-//  ResultsTableViewController.m
+//  ChapterFacetTableViewController.m
 //  FilterDemo
 //
-//  Created by Nick Murdoch on 12/09/2012.
+//  Created by Nick Murdoch on 27/09/2012.
 //  Copyright (c) 2012 Locayta Ltd. All rights reserved.
 //
 
-#import "ResultsTableViewController.h"
+#import "FacetsTableViewController.h"
 
-@interface ResultsTableViewController ()
+@interface FacetsTableViewController ()
 
 @end
 
-@implementation ResultsTableViewController
+@implementation FacetsTableViewController
 
 @synthesize result;
 
@@ -36,16 +36,10 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)viewDidUnload
+- (void)didReceiveMemoryWarning
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -53,32 +47,34 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return [[result facets] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (result == nil) {
-        return 0;
-    }
-    return [result itemCount];
+    NSString *key = [[[result facets] allKeys] objectAtIndex:section];
+    NSDictionary *facetData = [[result facets] objectForKey:key];
+    return [facetData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSString *key = [[[result facets] allKeys] objectAtIndex:[indexPath section]];
+    NSDictionary *facetData = [[result facets] objectForKey:key];
+    
+    static NSString *FacetCellIdentifier = @"FacetCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FacetCellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FacetCellIdentifier];
     }
     
     // Configure the cell...
-    int pos = [indexPath row];
-    NSDictionary * resultItem = [[[result results] objectAtIndex:pos] objectForKey:@"fields"];
-    [cell textLabel].text = [NSString stringWithFormat:@"Chapter %@: %@",
-                             [[resultItem objectForKey:@"chapter"] objectAtIndex:0],
-                             [[resultItem objectForKey:@"title"] objectAtIndex:0]];
+    NSString *optionKey = [[facetData allKeys] objectAtIndex:[indexPath row]];
+    NSNumber *optionValue = [facetData objectForKey:optionKey];
+    
+    [cell textLabel].text = [NSString stringWithFormat:@"%@ (%@ results)",
+                             optionKey, optionValue];
     
     UIFont *myFont = [UIFont fontWithName: @"Helvetica" size: 14.0];
     cell.textLabel.font  = myFont;

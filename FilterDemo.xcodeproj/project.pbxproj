@@ -15,6 +15,7 @@
 		1F4030A116009D7500A56F32 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4030A016009D7500A56F32 /* AppDelegate.m */; };
 		1F4030A416009D7500A56F32 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F4030A216009D7500A56F32 /* MainStoryboard.storyboard */; };
 		1F4030A716009D7500A56F32 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4030A616009D7500A56F32 /* ViewController.m */; };
+		1F528B82161489EA00E91B1E /* FacetsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F528B81161489EA00E91B1E /* FacetsTableViewController.m */; };
 		1F81FBD41600A813000C225E /* schema.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F81FBD31600A813000C225E /* schema.plist */; };
 		1F81FBD81600D357000C225E /* ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F81FBD71600D357000C225E /* ResultsTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -33,6 +34,8 @@
 		1F4030A316009D7500A56F32 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		1F4030A516009D7500A56F32 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		1F4030A616009D7500A56F32 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1F528B80161489E900E91B1E /* FacetsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacetsTableViewController.h; sourceTree = "<group>"; };
+		1F528B81161489EA00E91B1E /* FacetsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacetsTableViewController.m; sourceTree = "<group>"; };
 		1F81FBD31600A813000C225E /* schema.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = schema.plist; sourceTree = "<group>"; };
 		1F81FBD61600D357000C225E /* ResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewController.h; sourceTree = "<group>"; };
 		1F81FBD71600D357000C225E /* ResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewController.m; sourceTree = "<group>"; };
@@ -60,6 +63,7 @@
 				1F40308D16009D7500A56F32 /* Products */,
 			);
 			sourceTree = "<group>";
+			wrapsLines = 1;
 		};
 		1F40308D16009D7500A56F32 /* Products */ = {
 			isa = PBXGroup;
@@ -84,6 +88,8 @@
 			children = (
 				1F40309F16009D7500A56F32 /* AppDelegate.h */,
 				1F4030A016009D7500A56F32 /* AppDelegate.m */,
+				1F528B80161489E900E91B1E /* FacetsTableViewController.h */,
+				1F528B81161489EA00E91B1E /* FacetsTableViewController.m */,
 				1F4030A216009D7500A56F32 /* MainStoryboard.storyboard */,
 				1F81FBD61600D357000C225E /* ResultsTableViewController.h */,
 				1F81FBD71600D357000C225E /* ResultsTableViewController.m */,
@@ -174,6 +180,7 @@
 				1F4030A116009D7500A56F32 /* AppDelegate.m in Sources */,
 				1F4030A716009D7500A56F32 /* ViewController.m in Sources */,
 				1F81FBD81600D357000C225E /* ResultsTableViewController.m in Sources */,
+				1F528B82161489EA00E91B1E /* FacetsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@
 
 @implementation ViewController
 @synthesize results_table;
+@synthesize facets_table;
 @synthesize search_text;
 @synthesize search_chapter;
 @synthesize index_title;
@@ -34,6 +35,11 @@
     rtvc = [[ResultsTableViewController alloc] initWithStyle:UITableViewStylePlain];
     results_table.delegate = rtvc;
     results_table.dataSource = rtvc;
+    
+    /* Wire up the chapter facet table view */
+    ftvc = [[FacetsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    facets_table.delegate = ftvc;
+    facets_table.dataSource = ftvc;
 }
 
 - (void)viewDidUnload
@@ -47,6 +53,7 @@
     [self setSearch_text:nil];
     [self setSearch_chapter:nil];
     [self setResults_table:nil];
+    [self setfacets_table:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -63,6 +70,7 @@
     [search_text release];
     [search_chapter release];
     [results_table release];
+    [facets_table release];
     [super dealloc];
 }
 
@@ -118,15 +126,28 @@
         query.filters = filters;
     }
     
+    NSArray *facets = [NSArray arrayWithObject:@"chapter"];
+    
+    /* Reset the table views: */
+    [self populateSearchResultListing:nil];
+    
+    /* Perform the search: */
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate.request searchWithQuery:query];
+    [appDelegate.request searchWithQuery:query topDocIndex:0 docsPerPage:10 facets:facets];
+
+    sleep(1);
+    NSLog(@"query description: %@", [query queryDescription]);
 }
 
 - (void) populateSearchResultListing:(LSLocaytaSearchResult *)searchResult {
     /* Called when searches successfully complete */
+    NSLog(@"Populating search results with results: %@, facets: %@", [searchResult results], [searchResult facets]);
     rtvc.result = searchResult;
+    ftvc.result = searchResult;
     [results_table reloadData];
     [results_table reloadInputViews];
+    [facets_table reloadData];
+    [facets_table reloadInputViews];
 }
 
 - (IBAction)genericTextFieldDone:(id)sender {
