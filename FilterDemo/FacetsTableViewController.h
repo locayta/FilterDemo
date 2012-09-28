@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <LocaytaSearch/LSLocaytaSearch.h>
 
-@interface FacetsTableViewController : UITableViewController
+@interface FacetsTableViewController : UITableViewController {
+    SEL selectorForRowSelect;
+    id targetForRowSelect;
+}
 
 @property (nonatomic, retain) LSLocaytaSearchResult *result;
+
+- (void) setSelectorForRowSelect:(SEL)sel target:(id)target;
 
 @end

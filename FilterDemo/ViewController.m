@@ -22,6 +22,7 @@
 @synthesize index_title;
 @synthesize index_chapter;
 @synthesize index_description;
+@synthesize remove_refinement;
 
 - (void)viewDidLoad
 {
@@ -41,12 +42,16 @@
     ftvc = [[FacetsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
     facets_table.delegate = ftvc;
     facets_table.dataSource = ftvc;
+    [ftvc setSelectorForRowSelect:@selector(facetCellTapped:) target:self];
     
     /* Put borders around the facet and results table view */
     [facets_table.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [facets_table.layer setBorderWidth:1.0];
     [results_table.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [results_table.layer setBorderWidth:1.0];
+    
+    /* Hide the Remove Refinement button until we need it */
+    remove_refinement.hidden = YES;
 }
 
 - (void)viewDidUnload
@@ -61,6 +66,7 @@
     [self setSearch_chapter:nil];
     [self setResults_table:nil];
     [self setFacets_table:nil];
+    [self setRemove_refinement:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -78,6 +84,7 @@
     [search_chapter release];
     [results_table release];
     [facets_table release];
+    [remove_refinement release];
     [super dealloc];
 }
 
@@ -131,6 +138,9 @@
                                   chapterText, @"chapter",
                                   nil];
         query.filters = filters;
+        remove_refinement.hidden = NO;
+    } else {
+        remove_refinement.hidden = YES;
     }
     
     NSArray *facets = [NSArray arrayWithObject:@"chapter"];
@@ -154,6 +164,18 @@
     [facets_table reloadInputViews];
 }
 
+- (void) facetCellTapped:(NSString *)chapterString {
+    search_chapter.text = chapterString;
+    [self searchTapped:nil];
+}
+
+
+- (IBAction)removeRefinementTapped:(id)sender {
+    search_chapter.text = @"";
+    [self searchTapped:nil];
+}
+
+/* Generic remove-keyboard method for all text fields' didEndOnExit */
 - (IBAction)genericTextFieldDone:(id)sender {
     [sender resignFirstResponder];
 }

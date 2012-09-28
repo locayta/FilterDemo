@@ -25,6 +25,11 @@
     return self;
 }
 
+- (void) setSelectorForRowSelect:(SEL)sel target:(id)target {
+    selectorForRowSelect = sel;
+    targetForRowSelect = target;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -146,6 +151,13 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
+    NSString *key = [[[result facets] allKeys] objectAtIndex:[indexPath section]];
+    NSDictionary *facetData = [[result facets] objectForKey:key];
+    NSString *optionKey = [[facetData allKeys] objectAtIndex:[indexPath row]];
+    
+    if (targetForRowSelect != nil) {
+        [targetForRowSelect performSelector:selectorForRowSelect withObject:optionKey];
+    }
 }
 
 @end
