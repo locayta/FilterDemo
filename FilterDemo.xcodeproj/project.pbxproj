@@ -19,6 +19,7 @@
 		1F528BE31615B0B400E91B1E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F528BE21615B0B400E91B1E /* Default-568h@2x.png */; };
 		1F528BE61615B12B00E91B1E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F528BE51615B12B00E91B1E /* Default@2x.png */; };
 		1F528BE81615B16A00E91B1E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F528BE71615B16A00E91B1E /* Default.png */; };
+		1F7D1BF91653C018003B8791 /* LocaytaSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7D1BF81653C018003B8791 /* LocaytaSearch.framework */; };
 		1F81FBD41600A813000C225E /* schema.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F81FBD31600A813000C225E /* schema.plist */; };
 		1F81FBD81600D357000C225E /* ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F81FBD71600D357000C225E /* ResultsTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		1F528BE21615B0B400E91B1E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1F528BE51615B12B00E91B1E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		1F528BE71615B16A00E91B1E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		1F7D1BF81653C018003B8791 /* LocaytaSearch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocaytaSearch.framework; path = ../../Desktop/LocaytaSearch.framework; sourceTree = "<group>"; };
 		1F81FBD31600A813000C225E /* schema.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = schema.plist; sourceTree = "<group>"; };
 		1F81FBD61600D357000C225E /* ResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewController.h; sourceTree = "<group>"; };
 		1F81FBD71600D357000C225E /* ResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewController.m; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 				1F40309116009D7500A56F32 /* UIKit.framework in Frameworks */,
 				1F40309316009D7500A56F32 /* Foundation.framework in Frameworks */,
 				1F40309516009D7500A56F32 /* CoreGraphics.framework in Frameworks */,
+				1F7D1BF91653C018003B8791 /* LocaytaSearch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +86,7 @@
 		1F40308F16009D7500A56F32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F7D1BF81653C018003B8791 /* LocaytaSearch.framework */,
 				1F40309016009D7500A56F32 /* UIKit.framework */,
 				1F40309216009D7500A56F32 /* Foundation.framework */,
 				1F40309416009D7500A56F32 /* CoreGraphics.framework */,
@@ -279,6 +283,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../Desktop\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FilterDemo/FilterDemo-Prefix.pch";
@@ -298,6 +303,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../Desktop\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FilterDemo/FilterDemo-Prefix.pch";
