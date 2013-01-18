@@ -22,6 +22,7 @@
 
 @property (retain, nonatomic) IBOutlet UITextField *search_text;
 @property (retain, nonatomic) IBOutlet UITextField *search_chapter;
+@property (retain, nonatomic) IBOutlet UIButton *searchButton;
 - (IBAction)searchTapped:(id)sender;
 - (void)facetCellTapped:(NSString*)chapterString;
 - (void)populateSearchResultListing:(LSLocaytaSearchResult *)searchResult;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G56" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="11G63" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -149,6 +149,7 @@ Refinement</string>
                         <outlet property="index_title" destination="v9A-el-IJq" id="PKa-UF-EW4"/>
                         <outlet property="remove_refinement" destination="0U2-vn-CC2" id="AYc-p0-ErL"/>
                         <outlet property="results_table" destination="did-gc-Q3v" id="vjp-cK-sLw"/>
+                        <outlet property="searchButton" destination="S6O-QA-QbN" id="fbo-lj-uAr"/>
                         <outlet property="search_chapter" destination="i87-4f-yNq" id="7e2-iL-8RG"/>
                         <outlet property="search_text" destination="WSQ-fe-4Wd" id="WFT-dq-ANm"/>
                     </connections>
@@ -157,25 +158,6 @@ Refinement</string>
             </objects>
         </scene>
     </scenes>
-    <classes>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="genericTextFieldDone:"/>
-                <relationship kind="action" name="indexTapped:"/>
-                <relationship kind="action" name="removeRefinementTapped:"/>
-                <relationship kind="action" name="searchTapped:"/>
-                <relationship kind="outlet" name="facets_table" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="index_chapter" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="index_description" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="index_title" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="remove_refinement" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="results_table" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="search_chapter" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="search_text" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

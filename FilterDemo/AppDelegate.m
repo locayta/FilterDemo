@@ -94,6 +94,7 @@
 
 - (void) locaytaSearchRequest:(LSLocaytaSearchRequest *)searchRequest didFailWithError:(NSError *)error {
     NSLog(@"Search request failed: %@", [error localizedDescription]);
+    [viewcontroller populateSearchResultListing:nil];
 }
 
 @end

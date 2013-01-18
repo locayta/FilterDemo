@@ -52,6 +52,9 @@
     
     /* Hide the Remove Refinement button until we need it */
     remove_refinement.hidden = YES;
+    
+    /* Set the search button's "searching" text */
+    [self.searchButton setTitle:@"Searching" forState:UIControlStateDisabled];
 }
 
 - (void)viewDidUnload
@@ -67,6 +70,7 @@
     [self setResults_table:nil];
     [self setFacets_table:nil];
     [self setRemove_refinement:nil];
+    [self setSearchButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -85,6 +89,7 @@
     [results_table release];
     [facets_table release];
     [remove_refinement release];
+    [_searchButton release];
     [super dealloc];
 }
 
@@ -148,6 +153,10 @@
     /* Reset the table views: */
     [self populateSearchResultListing:nil];
     
+    /* Deactivate the search button while searching is in progress: */
+    [self.searchButton setEnabled:NO];
+    [self.searchButton setAlpha:0.6f];
+    
     /* Perform the search: */
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.request searchWithQuery:query topDocIndex:0 docsPerPage:10 facets:facets];
@@ -162,6 +171,10 @@
     [results_table reloadInputViews];
     [facets_table reloadData];
     [facets_table reloadInputViews];
+    
+    /* Re-enable the search button */
+    [self.searchButton setAlpha:1.0f];
+    [self.searchButton setEnabled:YES];
 }
 
 - (void) facetCellTapped:(NSString *)chapterString {
