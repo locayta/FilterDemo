@@ -26,6 +26,7 @@
 
 #import "ViewController.h"
 #import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ViewController ()
 
@@ -33,11 +34,13 @@
 
 @implementation ViewController
 @synthesize results_table;
+@synthesize facets_table;
 @synthesize search_text;
 @synthesize search_chapter;
 @synthesize index_title;
 @synthesize index_chapter;
 @synthesize index_description;
+@synthesize remove_refinement;
 
 - (void)viewDidLoad
 {
@@ -52,6 +55,24 @@
     rtvc = [[ResultsTableViewController alloc] initWithStyle:UITableViewStylePlain];
     results_table.delegate = rtvc;
     results_table.dataSource = rtvc;
+    
+    /* Wire up the chapter facet table view */
+    ftvc = [[FacetsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    facets_table.delegate = ftvc;
+    facets_table.dataSource = ftvc;
+    [ftvc setSelectorForRowSelect:@selector(facetCellTapped:) target:self];
+    
+    /* Put borders around the facet and results table view */
+    [facets_table.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [facets_table.layer setBorderWidth:1.0];
+    [results_table.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [results_table.layer setBorderWidth:1.0];
+    
+    /* Hide the Remove Refinement button until we need it */
+    remove_refinement.hidden = YES;
+    
+    /* Set the search button's "searching" text */
+    [self.searchButton setTitle:@"Searching" forState:UIControlStateDisabled];
 }
 
 - (void)viewDidUnload
@@ -65,6 +86,9 @@
     [self setSearch_text:nil];
     [self setSearch_chapter:nil];
     [self setResults_table:nil];
+    [self setFacets_table:nil];
+    [self setRemove_refinement:nil];
+    [self setSearchButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -81,6 +105,9 @@
     [search_text release];
     [search_chapter release];
     [results_table release];
+    [facets_table release];
+    [remove_refinement release];
+    [_searchButton release];
     [super dealloc];
 }
 
@@ -147,19 +174,52 @@
                                   chapterText, @"chapter",
                                   nil];
         query.filters = filters;
+        remove_refinement.hidden = NO;
+    } else {
+        remove_refinement.hidden = YES;
     }
     
+    NSArray *facets = [NSArray arrayWithObject:@"chapter"];
+    
+    /* Reset the table views: */
+    [self populateSearchResultListing:nil];
+    
+    /* Deactivate the search button while searching is in progress: */
+    [self.searchButton setEnabled:NO];
+    [self.searchButton setAlpha:0.6f];
+    
+    /* Perform the search: */
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate.request searchWithQuery:query];
+    [appDelegate.request searchWithQuery:query topDocIndex:0 docsPerPage:10 facets:facets];
+
 }
 
 - (void) populateSearchResultListing:(LSLocaytaSearchResult *)searchResult {
     /* Called when searches successfully complete */
     rtvc.result = searchResult;
+    ftvc.result = searchResult;
     [results_table reloadData];
     [results_table reloadInputViews];
+    [facets_table reloadData];
+    [facets_table reloadInputViews];
+    
+    /* Re-enable the search button */
+    [self.searchButton setAlpha:1.0f];
+    [self.searchButton setEnabled:YES];
 }
 
+- (void) facetCellTapped:(NSString *)chapterString {
+    search_chapter.text = chapterString;
+    [self searchTapped:nil];
+}
+
+
+- (IBAction)removeRefinementTapped:(id)sender {
+    search_chapter.text = @"";
+    [self searchTapped:nil];
+}
+
+/* Generic remove-keyboard method for all text fields' didEndOnExit */
 - (IBAction)genericTextFieldDone:(id)sender {
     [sender resignFirstResponder];
 }
